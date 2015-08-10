@@ -8,6 +8,6 @@ RUN curl -L https://www.opscode.com/chef/install.sh | bash -s -- -P chefdk
 RUN locale-gen en_US.UTF-8
 
 ADD Gemfile /Gemfile
-/opt/chefdk/embedded/bin/bundle install
+RUN /opt/chefdk/embedded/bin/bundle install
 
-CMD /opt/chefdk/embedded/bin/ruby /opt/chefdk/embedded/bin/bundle exec kitchen converge
+CMD /opt/chefdk/embedded/bin/bundle exec kitchen converge
