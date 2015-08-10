@@ -11,4 +11,4 @@ ADD Gemfile /Gemfile
 RUN /opt/chefdk/embedded/bin/bundle install
 RUN echo "gem 'berkshelf', '>= 3.0.0'" >> Gemfile
 
-CMD PATH="/opt/chefdk/embedded/bin/:$PATH" LANG=C.UTF-8 /opt/chefdk/embedded/bin/bundle exec kitchen converge
+CMD cp -R /root/.ssh_host /root/.ssh && chown -R root /root/.ssh && PATH="/opt/chefdk/embedded/bin/:$PATH" LANG=C.UTF-8 /opt/chefdk/embedded/bin/bundle exec kitchen converge
