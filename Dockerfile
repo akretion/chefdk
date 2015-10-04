@@ -11,5 +11,6 @@ ADD Gemfile /Gemfile
 RUN /opt/chefdk/embedded/bin/bundle install
 RUN echo "gem 'berkshelf', '>= 3.0.0'" >> Gemfile
 
-ADD kitchen_wrapper /kitchen_wrapper
-ENTRYPOINT ["/kitchen_wrapper"]
+WORKDIR /workspace
+ADD bundle_exec_wrapper /bundle_exec_wrapper
+ENTRYPOINT ["/bundle_exec_wrapper"]
