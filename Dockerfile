@@ -13,4 +13,5 @@ RUN echo "gem 'berkshelf', '>= 3.0.0'" >> Gemfile
 
 WORKDIR /workspace
 ADD bundle_exec_wrapper /bundle_exec_wrapper
+ADD Berksfile.sample /Berksfile.sample
 ENTRYPOINT ["/bundle_exec_wrapper"]
