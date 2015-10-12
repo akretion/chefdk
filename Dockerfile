@@ -11,7 +11,10 @@ ADD Gemfile /Gemfile
 RUN /opt/chefdk/embedded/bin/bundle install
 RUN echo "gem 'berkshelf', '>= 3.0.0'" >> Gemfile
 
+RUN curl https://dl.gliderlabs.com/sigil/latest/$(uname -sm|tr \  _).tgz | tar -zxC /usr/local/bin
+
 WORKDIR /workspace
 ADD bundle_exec_wrapper /bundle_exec_wrapper
+ADD user.tmpl /user.tmpl
 ADD Berksfile.sample /Berksfile.sample
 ENTRYPOINT ["/bundle_exec_wrapper"]
