@@ -10,7 +10,7 @@ fi
 if [[ -d /root/.ssh_host ]]; then
   cp -R /root/.ssh_host /root/.ssh && chown -R root /root/.ssh
   mkdir -p /data_bags/users
-  sigil -p -f /user.tmpl "kitchen_operator_key='$(cat /root/.ssh/id_rsa.pub)'" > /data_bags/users/kitchen_operator.json
+  sigil -p -f /user.tmpl "kitchen_operator_key=$(cat /root/.ssh/id_rsa.pub)" > /data_bags/users/kitchen_operator.json
 fi
 PATH="/opt/chefdk/embedded/bin/:$PATH" LANG=C.UTF-8 /opt/chefdk/embedded/bin/bundle exec "$@"
 rm -f Berksfile
