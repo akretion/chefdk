@@ -4,7 +4,7 @@ set -eo pipefail;
 if [[ ! -f Berksfile ]]; then
   cp /Berksfile.sample Berksfile
   trap 'rm -f Berksfile' EXIT SIGINT SIGTERM
-  echo "Y29va2Jvb2sgJ2Rva2t1LXNpbXBsZScsIGdpdDogJ2h0dHBzOi8vZ2l0aHViLmNvbS9ybGlzdGVyL2NoZWYtZG9ra3Utc2ltcGxlLmdpdCcK" | base64 -d >> Berksfile
+  echo "Y29va2Jvb2sgJ2Rva2t1LXNpbXBsZScsIGdpdDogJ2h0dHBzOi8vZ2l0aHViLmNvbS9ydmFseWkvY2hlZi1kb2trdS1zaW1wbGUuZ2l0Jwo=" | base64 -d >> Berksfile
 fi
 
 if [[ -d /root/.ssh_host ]]; then
