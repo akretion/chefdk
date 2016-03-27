@@ -3,7 +3,7 @@ set -eo pipefail;
 
 if [[ ! -f Berksfile ]]; then
   cp /Berksfile.sample Berksfile
-  trap 'rm -f Berksfile' EXIT SIGINT SIGTERM
+  trap 'rm -f Berksfile Berksfile.lock' EXIT SIGINT SIGTERM
   echo "Y29va2Jvb2sgJ2Rva2t1LXNpbXBsZScsIGdpdDogJ2h0dHBzOi8vZ2l0aHViLmNvbS9ydmFseWkvY2hlZi1kb2trdS1zaW1wbGUuZ2l0Jwo=" | base64 -d >> Berksfile
 fi
 
@@ -13,4 +13,4 @@ if [[ -d /root/.ssh_host ]]; then
   sigil -p -f /user.tmpl "kitchen_operator_key=$(cat /root/.ssh/id_rsa.pub)" > /data_bags/users/kitchen_operator.json
 fi
 PATH="/opt/chefdk/embedded/bin/:$PATH" LANG=C.UTF-8 /opt/chefdk/embedded/bin/bundle exec "$@"
-rm -f Berksfile
+rm -f Berksfile Berksfile.lock
