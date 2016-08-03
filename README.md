@@ -5,7 +5,7 @@
 First create the Berksfile and .kitchen.yml files; then do
 
 ```
-docker run -ti -v "$HOME/.ssh:/root/.ssh_host" -v "$(pwd)/workspace" akretion/chefdk kitchen help
+docker run -ti -v "$HOME/.ssh:/root/.ssh_host" -v "$(pwd):/workspace" akretion/chefdk kitchen help
 ```
 
 
