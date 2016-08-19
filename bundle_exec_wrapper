@@ -1,10 +1,16 @@
 #!/usr/bin/env bash
 set -eo pipefail;
 
+if [[ ! -f .kitchen.yml ]]; then
+  cp /.kitchen.sample.yml .kitchen.yml
+  chmod 777 .kitchen.yml
+  echo "Please customize the .kitchen.yml generated file and run the command again!"
+fi
+
 if [[ ! -f Berksfile ]]; then
   cp /Berksfile.sample Berksfile
   trap 'rm -f Berksfile Berksfile.lock' EXIT SIGINT SIGTERM
-  echo "Y29va2Jvb2sgJ2Rva2t1LXNpbXBsZScsIGdpdDogJ2h0dHBzOi8vZ2l0aHViLmNvbS9ydmFseWkvY2hlZi1kb2trdS1zaW1wbGUuZ2l0Jwo=" | base64 -d >> Berksfile
+  chmod 777 Berksfile
 fi
 
 if [[ -d /root/.ssh_host ]]; then
@@ -12,5 +18,12 @@ if [[ -d /root/.ssh_host ]]; then
   mkdir -p /data_bags/users
   sigil -p -f /user.tmpl "kitchen_operator_key=$(cat /root/.ssh/id_rsa.pub)" > /data_bags/users/kitchen_operator.json
 fi
-PATH="/opt/chefdk/embedded/bin/:$PATH" LANG=C.UTF-8 /opt/chefdk/embedded/bin/bundle exec "$@"
+
+if [[ "$1" == "kitchen" ]]; then
+  PATH="/opt/chefdk/embedded/bin/:$PATH" LANG=C.UTF-8 /opt/chefdk/embedded/bin/bundle exec "$@"
+else
+  PATH="/opt/chefdk/embedded/bin/:$PATH" LANG=C.UTF-8 /opt/chefdk/embedded/bin/bundle exec kitchen converge
+fi
+
 rm -f Berksfile Berksfile.lock
+rm -r .kitchen
