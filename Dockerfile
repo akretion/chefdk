@@ -8,6 +8,7 @@ RUN curl -L https://www.opscode.com/chef/install.sh | bash -s -- -P chefdk
 RUN locale-gen en_US.UTF-8
 
 ADD Gemfile /Gemfile
+ADD .kitchen.sample.yml /.kitchen.sample.yml
 RUN /opt/chefdk/embedded/bin/bundle install
 RUN echo "gem 'berkshelf', '>= 3.0.0'" >> Gemfile
 
