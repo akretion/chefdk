@@ -26,4 +26,4 @@ else
 fi
 
 rm -f Berksfile Berksfile.lock
-rm -r .kitchen
+rm -rf .kitchen
